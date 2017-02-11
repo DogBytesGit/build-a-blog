@@ -1,11 +1,47 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
-		<title>Build-a-Blog</title>
-
+		<title>Build-a-blog</title>
 	</head>
+	
+	<style type="text/css">
+	body {
+		background-color: lime;
+		font-family: sans-serif;
+		width: 800px;
+		margin: 0 auto;
+		padding: 10px;
+	}
+	
+	h1 {
+		font-color: blue;
+	}
+	hr {
+		margin: 20px auto;
+	}
+	
+	.blog-title {
+		font-weight: bold;
+		font-size: 20px;
+	}
+	
+	.blog-text {
+		margin: 0;
+		font-size: 17px;
+	}
+	</style>
+	
 	<body>
-	<h1>DogByte's Blog</h1>
+	<h1>Build-a-blog</h1>
+	<form>
+	<hr>
+	{% for art in arts %}
+		<div class="art">
+			<div class="art-title">{{art.title}}</div>
+			<pre class="art-body">{{art.art}}</pre>
+		</div>
+	{% endfor %}
 	
 	</body>
 </html>
