@@ -21,12 +21,12 @@
 		margin: 20px auto;
 	}
 	
-	.blog-title {
+	.post-title {
 		font-weight: bold;
 		font-size: 20px;
 	}
 	
-	.blog-text {
+	.post-body {
 		margin: 0;
 		font-size: 17px;
 	}
@@ -34,12 +34,14 @@
 	
 	<body>
 	<h1>Build-a-blog</h1>
+    <a href="/post">Submit</a>
 	<form>
 	<hr>
-	{% for art in arts %}
-		<div class="art">
-			<div class="art-title">{{art.title}}</div>
-			<pre class="art-body">{{art.art}}</pre>
+	{% for bPost in bPosts %}
+		<div class="post">
+			<div class="post-title">{{bPost.title}}</div>
+			<pre class="post-body">{{bPost.bPost}}</pre>
+            <hr>
 		</div>
 	{% endfor %}
 	

@@ -11,6 +11,7 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 
 
 class Handler(webapp2.RequestHandler):
+    
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
@@ -21,41 +22,53 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-#Create the database entry
-class Art(db.Model):
+#Setup the database fields
+class BlogPost(db.Model):
     title = db.StringProperty(required = True)
-    art = db.TextProperty(required = True)
+    bPost = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
     
 
 class MainPage(Handler):
 
-    def render_front(self, title="", art="", error=""):
-        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC ") 
-        self.render("front.html", title=title, art=art, error=error, arts=arts)
+    def render_main(self, title="", post="", error=""):
+        bPosts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created DESC ") 
+        self.render("main.html", bPosts=bPosts)
+
+
         
     def get(self):
         #responds to the 'get' when webpage is requested
-        self.render_front()
+        self.render_main()
 
+class PostPage(Handler):
+
+    def render_submission(self, title="", bPost="", error=""): 
+        self.render("submission.html")
+        
+    def get(self):
+        #responds to the 'get' when webpage is requested
+        self.render_submission()
+        
     def post(self):
         #responds when the submit button posts 
         title = self.request.get("title")
-        art = self.request.get("art")
+        bPost = self.request.get("bPost")
 
-        if title and art:
+        if title and bPost:
             #create an instance of database entry
-            a = Art(title = title, art = art)
+            p = BlogPost(title = title, bPost = bPost)
             #store the instance in the database
-            a.put()
+            p.put()
             #when finished redirect to main page
             self.redirect("/")
         else:
-            error = "We need both a title and some artwork!"
-            self.render_front(title, art, error)
+            error = "We need both a title and some text!"
+            self.render_submission(title, bPost, error)
 
             
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+    ('/', MainPage),
+    ('/post', PostPage)
 ], debug=True)
