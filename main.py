@@ -32,7 +32,7 @@ class BlogPost(db.Model):
 class MainPage(Handler):
 
     def render_main(self, title="", post="", error=""):
-        bPosts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created DESC ") 
+        bPosts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created DESC LIMIT 5") 
         self.render("main.html", bPosts=bPosts)
 
 
