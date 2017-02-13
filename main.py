@@ -43,8 +43,9 @@ class MainPage(Handler):
 
 class PostPage(Handler):
 
-    def render_submission(self, title="", bPost="", error=""): 
-        self.render("submission.html")
+    def render_submission(self, title="", bPost="", error=""):
+        #Added title, bPost and error to line below on 2/12
+        self.render("submission.html", title=title, bPost=bPost, error=error)
         
     def get(self):
         #responds to the 'get' when webpage is requested
@@ -62,9 +63,10 @@ class PostPage(Handler):
             p.put()
             #when finished redirect to main page
             self.redirect("/")
+
         else:
             error = "We need both a title and some text!"
-            self.render_submission(title, bPost, error)
+            self.render_submission(title = title, bPost = bPost, error = error)
 
             
 

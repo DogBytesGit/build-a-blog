@@ -7,7 +7,6 @@
 	
 	<style type="text/css">
 	body {
-		background-color: lime;
 		font-family: sans-serif;
 		width: 800px;
 		margin: 0 auto;
@@ -16,7 +15,13 @@
 	
 	h1 {
 		font-color: blue;
+		float: left;
 	}
+	
+	p.clear {
+		clear: both;
+	}
+	
 	hr {
 		margin: 20px auto;
 	}
@@ -30,12 +35,24 @@
 		margin: 0;
 		font-size: 17px;
 	}
+	
+	.but {
+		float: right;
+		width: 200px;
+		height: 50px;
+		font-size: 16px;
+		border-radius: 50%;
+		background-color: green;
+		border: 4px solid green;
+	}
+	
 	</style>
 	
 	<body>
 	<h1>Build-a-blog</h1>
-    <a href="/post">Submit</a>
+    <a href="/post"><button class="but" type="button">Submit a post</button></a>
 	<form>
+	<p class="clear"></p>
 	<hr>
 	{% for bPost in bPosts %}
 		<div class="post">
