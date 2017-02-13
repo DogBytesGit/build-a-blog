@@ -29,6 +29,11 @@
 	.post-title {
 		font-weight: bold;
 		font-size: 20px;
+		float: left;
+	}
+	
+	.created {
+		float: right;
 	}
 	
 	.post-body {
@@ -57,6 +62,8 @@
 	{% for bPost in bPosts %}
 		<div class="post">
 			<div class="post-title">{{bPost.title}}</div>
+			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}_{{bPost.created.hour}}:{{bPost.created.minute}}:{{bPost.created.second}}</div>
+			<p class="clear"></p>
 			<pre class="post-body">{{bPost.bPost}}</pre>
             <hr>
 		</div>
