@@ -68,9 +68,16 @@ class PostPage(Handler):
             error = "We need both a title and some text!"
             self.render_submission(title = title, bPost = bPost, error = error)
 
-            
+class ViewPostHandler(Handler):
+
+    def get(self, id):
+        #responds when a request comes in with a permalink
+        id = int(id)
+        bPosts = BlogPost.get_by_id(id)
+        self.render("post.html", bPost=bPosts)            
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/post', PostPage)
+    ('/post', PostPage),
+    (webapp2.Route('/blog/<id:\d+>', ViewPostHandler))
 ], debug=True)

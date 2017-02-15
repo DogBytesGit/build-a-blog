@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Build-a-blog</title>
+	</head>
+	
+	<style type="text/css">
+	body {
+		font-family: sans-serif;
+		width: 800px;
+		margin: 0 auto;
+		padding: 10px;
+	}
+	
+	h1 {
+		font-color: blue;
+		float: left;
+	}
+	
+	p.clear {
+		clear: both;
+	}
+	
+	hr {
+		margin: 20px auto;
+	}
+	
+	.post-title {
+		font-weight: bold;
+		font-size: 20px;
+		float: left;
+	}
+	
+	.created {
+		float: right;
+	}
+	
+	.post-body {
+		margin: 0;
+		font-size: 17px;
+	}
+	
+	.but {
+		float: right;
+		width: 200px;
+		height: 50px;
+		font-size: 16px;
+		border-radius: 50%;
+		background-color: green;
+		border: 4px solid green;
+	}
+	
+	</style>
+	
+	<body>
+	<h1>Build-a-blog</h1>
+    <a href="/post"><button class="but" type="button">Submit a post</button></a>
+	<form>
+	<p class="clear"></p>
+	<hr>
+		<div class="post">
+			<div class="post-title">{{bPost.title}}</div>
+			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}_{{bPost.created.hour}}:{{bPost.created.minute}}:{{bPost.created.second}}</div>
+			<p class="clear"></p>
+			<pre class="post-body">{{bPost.bPost}}</pre>
+            <hr>
+		</div>
+	
+	</body>
+</html>
