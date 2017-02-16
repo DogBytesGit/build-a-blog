@@ -10,6 +10,12 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
 
+class Blog(db.Model):
+    title = db.StringProperty(required = True)
+    body = db.TextProperty(required = True)
+    created = db.DateTimeProperty(auto_now_add = True)
+
+
 class Handler(webapp2.RequestHandler):
     
     def write(self, *a, **kw):
@@ -22,30 +28,22 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-#Setup the database fields
-class BlogPost(db.Model):
-    title = db.StringProperty(required = True)
-    bPost = db.TextProperty(required = True)
-    created = db.DateTimeProperty(auto_now_add = True)
-    
 
-class MainPage(Handler):
+class Main(Handler):
 
-    def render_main(self, title="", post="", error=""):
-        bPosts = db.GqlQuery("SELECT * FROM BlogPost ORDER BY created DESC LIMIT 5") 
+    def render_main(self, title="", body="", error=""):
+        bPosts = db.GqlQuery("SELECT * FROM Blog ORDER BY created DESC LIMIT 5") 
         self.render("main.html", bPosts=bPosts)
-
-
         
     def get(self):
         #responds to the 'get' when webpage is requested
         self.render_main()
 
-class PostPage(Handler):
 
-    def render_submission(self, title="", bPost="", error=""):
-        #Added title, bPost and error to line below on 2/12
-        self.render("submission.html", title=title, bPost=bPost, error=error)
+class NewPost(Handler):
+
+    def render_submission(self, title="", body="", error=""):
+        self.render("submission.html", title=title, body=body, error=error)
         
     def get(self):
         #responds to the 'get' when webpage is requested
@@ -54,30 +52,31 @@ class PostPage(Handler):
     def post(self):
         #responds when the submit button posts 
         title = self.request.get("title")
-        bPost = self.request.get("bPost")
+        body = self.request.get("body")
 
-        if title and bPost:
+        if title and body:
             #create an instance of database entry
-            p = BlogPost(title = title, bPost = bPost)
+            p = Blog(title = title, body = body)
             #store the instance in the database
             p.put()
             #when finished redirect to main page
             self.redirect("/")
-
         else:
             error = "We need both a title and some text!"
-            self.render_submission(title = title, bPost = bPost, error = error)
+            self.render_submission(title = title, body = body, error = error)
 
-class ViewPostHandler(Handler):
+
+class ViewPost(Handler):
 
     def get(self, id):
         #responds when a request comes in with a permalink
         id = int(id)
-        bPosts = BlogPost.get_by_id(id)
-        self.render("post.html", bPost=bPosts)            
+        bPost = Blog.get_by_id(id)
+        self.render("post.html", bPost=bPost)            
+
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/post', PostPage),
-    (webapp2.Route('/blog/<id:\d+>', ViewPostHandler))
+    ('/', Main),
+    ('/post', NewPost),
+    (webapp2.Route('/blog/<id:\d+>', ViewPost))
 ], debug=True)
