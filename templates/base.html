@@ -9,10 +9,23 @@
 	</head>
 	
 	<body>
+	<div id="wrapper">
+	<div id="banner">Build-a-blog
+	</div>
+	<div id="menuTop">
+	    <a href="/"><button>Home</button></a>
+	    <a href="/post"><button>Submit</button></a>
+	    <a href="/search"><button>Search</button></a>
+	    <a href="/about"><button>About</button></a>
+	</div>
 	<div id="content">{% block content %}{% endblock %}</div>
+	
 	<div id="footer">{% block footer %}
-	&copy; Copyright 2017 by John P. Sirois
+	Website &copy; Copyright 2017 by John P. Sirois
 	{% endblock %}
+	</div>
+
+	
 	</div>
 	</body>
 	</html>

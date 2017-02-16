@@ -3,17 +3,16 @@
 {% block title %}Main{% endblock %}
 	
 {% block content %}
-	<h1>Build-a-blog</h1>
-    <a href="/post"><button class="but" type="button">Submit a post</button></a>
+	<h1>Main Page</h1>
 	<form>
 	<p class="clear"></p>
 	<hr>
 	{% for bPost in bPosts %}
-		<div class="post">
+		<div class="body">
 			<div class="post-title">{{bPost.title}}</div>
-			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}_{{bPost.created.hour}}:{{bPost.created.minute}}:{{bPost.created.second}}</div>
+			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}</div>
 			<p class="clear"></p>
-			<pre class="post-body">{{bPost.body}}</pre>
+			<p>{{bPost.body}}</p>
             <hr>
 		</div>
 	{% endfor %}

@@ -3,8 +3,10 @@
 {% block title %}Submission{% endblock %}
 
 {% block content %}
-	<h1>Submit a Post</h1>
+
+	<h1>Make a Post</h1>
 	<p class="clear"></p>
+	<div id="submission">	
 	<form method="post">
 		<label>
 			<div>Title</div>
@@ -17,6 +19,7 @@
 		
 		<div class="error">{{error}}</div>
 		
-		<input type="submit">
+		<input type="submit" value="Submit your post">
 	</form>
+	</div>
 {% endblock %}
