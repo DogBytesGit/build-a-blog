@@ -8,8 +8,10 @@
 	<p class="clear"></p>
 	<hr>
 	{% for bPost in bPosts %}
+		<span class="post-title">{{bPost.title}}</span>
+		<span id="permalink"><a href=/blog/{{bPost.key().id()}}>{{bPost.key().id()}}</a></span>
+		<p class="clear"></p>		
 		<div class="body">
-			<div class="post-title">{{bPost.title}}</div>
 			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}</div>
 			<p class="clear"></p>
 			<p>{{bPost.body}}</p>

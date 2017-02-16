@@ -1,6 +1,6 @@
 #wrapper {
 	width: 1024px;
-	height: 768px;
+	height: 100%;
 	background-color: #e3e0cf;
 }
 
@@ -23,6 +23,11 @@
 #footer {
 	margin: 25px;
 	text-align: right;
+}
+
+#permalink {
+	float: right;
+	margin-right: 25px;
 }
 
 #submission {

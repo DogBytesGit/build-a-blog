@@ -77,6 +77,7 @@ class ViewPost(Handler):
 
 app = webapp2.WSGIApplication([
     ('/', Main),
-    ('/post', NewPost),
+	('/blog', Main),
+    ('/newpost', NewPost),
     (webapp2.Route('/blog/<id:\d+>', ViewPost))
 ], debug=True)

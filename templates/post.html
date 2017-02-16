@@ -3,16 +3,15 @@
 {% block title %}Submit{% endblock %}
 
 {% block content %}
-	<h1>Build-a-blog</h1>
-    <a href="/post"><button class="but" type="button">Submit a post</button></a>
+	<h1>Single Post Results</h1>
 	<form>
 	<p class="clear"></p>
 	<hr>
-		<div class="post">
-			<div class="post-title">{{bPost.title}}</div>
-			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}_{{bPost.created.hour}}:{{bPost.created.minute}}:{{bPost.created.second}}</div>
+		<div class="post-title">{{bPost.title}}</div>	
+		<div id="submission">
+			<div class="created">{{bPost.created.month}}/{{bPost.created.day}}/{{bPost.created.year}}</div>
 			<p class="clear"></p>
-			<pre class="post-body">{{bPost.bPost}}</pre>
+			<pclass="post-body">{{bPost.body}}</p>
             <hr>
 		</div>
 {% endblock %}
